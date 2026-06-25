@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public InputAction moveAction;
+    public InputAction fireAction;
     public Vector2 moveInput;
     public float speed = 10f;
     public float xrange = 10f;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         moveAction.Enable();
+        fireAction.Enable();
     }
 
     // Update is called once per frame
@@ -46,5 +48,12 @@ public class PlayerController : MonoBehaviour
         //Move about
         transform.Translate(Vector3.right * moveInput.x * Time.deltaTime * speed);
         transform.Translate(Vector3.forward * moveInput.y * Time.deltaTime * speed);
+
+        if(fireAction.triggered)
+        {
+            //Launch a projectile
+            Instantiate(cookie, transform.position, cookie.transform.rotation);
+        }
     }
 }
+    
