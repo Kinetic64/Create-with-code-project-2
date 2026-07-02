@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerControllerX : MonoBehaviour
 {
@@ -9,16 +11,23 @@ public class PlayerControllerX : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fireAction.Enable();
+    fireAction.Enable();
     }
+    
 
     // Update is called once per frame
     void Update()
-    {
-        // On spacebar press, send dog
+    { 
         if (fireAction.triggered)
         {
             Instantiate(dogPrefab, transform.position, dogPrefab.transform.rotation);
+            fireAction.Disable();
+            Invoke("Yodelo", 2.0f);
+
         }
+    }
+    void Yodelo()
+    {
+        fireAction.Enable();
     }
 }
